@@ -1,0 +1,104 @@
+.docs-file-tree {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  padding-left: 0;
+  user-select: none;
+}
+[data-theme="dark"] .docs-file-tree {
+  --text-color: #e0e0e0;
+  --accent-color: #8ab4f8;
+  --active-color: #f28b82;
+  --border-color: #444;
+}
+.docs-file-tree {
+  --text-color: #333;
+  --accent-color: #4285f4;
+  --active-color: #ea4335;
+  --border-color: #e0e0e0;
+}
+.docs-top-level-section {
+  padding-left: 0;
+  margin-bottom: 12px;
+}
+.docs-top-level-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 16px 0 12px 0;
+  padding-left: 16px;
+  position: relative;
+  color: var(--text-color);
+}
+.docs-top-level-title::before {
+  content: "|";
+  color: var(--accent-color);
+  position: absolute;
+  left: 0;
+}
+.docs-top-level-section > .docs-file,
+.docs-top-level-section > .docs-folder > summary {
+  padding-left: 16px;
+  margin-left: 0;
+  color: var(--text-color);
+}
+.docs-folder {
+  margin: 4px 0;
+  position: relative;
+}
+.docs-folder > summary {
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+  color: var(--text-color);
+  padding: 4px 0 4px 16px;
+}
+.docs-folder > summary::-webkit-details-marker {
+  display: none;
+}
+.docs-folder > summary::before {
+  content: "|";
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+}
+.docs-folder:has(.docs-file.active) > summary {
+  color: var(--accent-color);
+}
+.docs-file {
+  display: block;
+  text-decoration: none;
+  color: var(--text-color);
+  padding: 4px 0 4px 16px;
+  margin: 2px 0;
+  position: relative;
+  transition: color 0.2s;
+}
+.docs-file:hover {
+  color: var(--accent-color);
+}
+.docs-file::before {
+  content: "|";
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+  transition: color 0.2s;
+}
+.docs-file.active {
+  color: var(--accent-color);
+  font-weight: bold;
+}
+.docs-file.active::before {
+  color: var(--active-color);
+}
+.docs-folder-contents {
+  margin-left: 12px;
+  padding-left: 6px;
+}
+.docs-root-files {
+  margin-top: 12px;
+  padding-left: 16px;
+}
+[data-theme="dark"] .docs-folder > summary::after {
+  color: var(--text-color);
+  opacity: 0.5;
+}

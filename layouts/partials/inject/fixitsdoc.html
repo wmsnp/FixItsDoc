@@ -1,0 +1,10 @@
+{{- if eq .Type "docs" -}}
+  {{- partial "docs/mobile-menu-button" . -}}
+  
+  {{- $js := resources.Get "js/docs-navigation.js" | minify | fingerprint -}}
+  {{- $css1 := resources.Get "css/docs-sidebar.css" | minify | fingerprint -}}
+  {{- $css2 := resources.Get "css/docs-mobile.css" | minify | fingerprint -}}
+  <script src="{{ $js.RelPermalink }}" defer></script>
+  <link rel="stylesheet" href="{{ $css1.RelPermalink }}">
+  <link rel="stylesheet" href="{{ $css2.RelPermalink }}">
+{{- end -}}

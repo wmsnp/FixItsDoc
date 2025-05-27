@@ -1,3 +1,3 @@
-module github.com/hugo-fixit/component-skeleton
+module github.com/wmsnp/FixItsDoc
 
 go 1.20

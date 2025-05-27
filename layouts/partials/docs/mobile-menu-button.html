@@ -1,0 +1,12 @@
+<button class="docs-mobile-menu-button" aria-label="Toggle documentation menu">
+  {{- dict "Class" "fa-solid fa-bars" | partial "plugin/icon.html" -}}
+</button>
+
+<div class="docs-mobile-menu-overlay">
+  <div class="docs-mobile-menu-content">
+    <button class="docs-mobile-menu-close">
+      {{- dict "Class" "fa-solid fa-times" | partial "plugin/icon.html" -}}
+    </button>
+    {{- partial "docs/file-tree.html" . -}}
+  </div>
+</div>

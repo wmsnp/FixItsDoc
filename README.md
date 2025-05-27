@@ -24,7 +24,7 @@ TODO 如有需要，请在此处添加演示
   [[module.imports]]
     path = "github.com/hugo-fixit/FixIt"
   [[module.imports]]
-    path = "github.com/hugo-fixit/FixItsDoc"
+    path = "github.com/wmsnp/FixItsDoc"
 ```
 
 在 Hugo 的第一次启动时，它将下载所需的文件。
@@ -42,7 +42,7 @@ hugo mod tidy
 
 ```bash
 git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt
-git submodule add https://github.com/hugo-fixit/FixItsDoc.git themes/FixItsDoc
+git submodule add https://github.com/wmsnp/FixItsDoc.git themes/FixItsDoc
 ```
 
 接下来编辑项目的 `hugo.toml` 并将此主题组件添加到你的主题中：

@@ -11,7 +11,9 @@
   {{- $showToc := $toc.enable | and (ne $tableOfContents `<nav id="TableOfContents"></nav>`) -}}
 
   <aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="{{ T "collections" }}">
-    {{- partial "docs/sidebar.html" . -}}
+    {{- if eq .Type "docs" -}}
+      {{- partial "docs/file-tree.html" . -}}
+    {{- end -}}
     
     {{- /* Collection List */ -}}
     {{- partial "single/collection-list.html" . -}}

@@ -1,67 +1,37 @@
-{{- $currentPage := . -}}
-{{- $rootSection := .FirstSection -}}
-{{- $currentRelPermalink := .RelPermalink -}}
-
-<div class="docs-file-tree">
-  {{- $firstLevelSections := where $rootSection.Pages "IsSection" true -}}
-  {{- range $firstLevelSections -}}
-    <div class="docs-top-level-section">
-      <h3 class="docs-top-level-title">{{ .Title }}</h3>
-      {{- template "renderTree" (dict "Node" . "CurrentPage" $currentPage) -}}
-    </div>
-  {{- end -}}
-  
-  {{- $rootPages := where $rootSection.Pages "IsSection" false -}}
-  {{- if $rootPages -}}
-    <div class="docs-root-files">
-      {{- template "renderTree" (dict "Node" $rootSection "CurrentPage" $currentPage "OnlyFiles" true) -}}
-    </div>
-  {{- end -}}
-</div>
+{{- $rootSection := . -}}
+{{- $p := .Parent -}}
+{{- range seq 1 20 }}
+    {{- if not $p }} {{- break -}} {{- end }}
+    {{- $rootSection = $p -}}
+    {{- if $p.Params.isTopLevel }} {{- break -}} {{- end }}
+    {{- $p = $p.Parent -}}
+{{- end -}}
+{{- if not $rootSection.Params.isTopLevel }}
+    {{- $rootSection = .FirstSection -}}
+{{- end -}}
 
 {{- define "renderTree" -}}
   {{- $node := .Node -}}
   {{- $currentPage := .CurrentPage -}}
   {{- $onlyFiles := .OnlyFiles | default false -}}
-  
+
   {{- $sortedPages := slice -}}
   {{- range $node.Pages -}}
-    {{- if and $onlyFiles (not .IsSection) -}}
-      {{- $weight := 0 -}}
-      {{- with .Params.weight -}}
-        {{- $weight = . -}}
-      {{- end -}}
-      {{- $sortedPages = $sortedPages | append (dict "Page" . "Weight" $weight) -}}
-    {{- else if not $onlyFiles -}}
-      {{- $weight := 0 -}}
-      {{- if .IsSection -}}
-        {{- with .Params.weight -}}
-          {{- $weight = . -}}
-        {{- end -}}
-      {{- else -}}
-        {{- with .Params.weight -}}
-          {{- $weight = . -}}
-        {{- end -}}
-      {{- end -}}
+    {{- if or (not $onlyFiles) (and $onlyFiles (not .IsSection)) -}}
+      {{- $weight := .Params.weight | default 0 -}}
       {{- $sortedPages = $sortedPages | append (dict "Page" . "Weight" $weight) -}}
     {{- end -}}
   {{- end -}}
-  
+
   {{- $sortedPages = sort $sortedPages "Weight" "asc" -}}
-  
+
   {{- range $sortedPages -}}
     {{- $page := .Page -}}
     {{- if and $page.IsSection (not $onlyFiles) -}}
-      {{- if $page.IsAncestor $currentPage -}}
-        <details class="docs-folder" open>
-      {{- else -}}
-        <details class="docs-folder">
-      {{- end -}}
-        <summary>
-          {{- $page.Title -}}
-        </summary>
+      <details class="docs-folder" {{ if $page.IsAncestor $currentPage }}open{{ end }}>
+        <summary>{{ $page.Title }}</summary>
         <div class="docs-folder-contents">
-          {{- template "renderTree" (dict "Node" $page "CurrentPage" $currentPage) -}}
+          {{- template "renderTree" (dict "Node" $page "CurrentPage" $currentPage "OnlyFiles" $onlyFiles) -}}
         </div>
       </details>
     {{- else if not $page.IsSection -}}
@@ -71,3 +41,8 @@
     {{- end -}}
   {{- end -}}
 {{- end -}}
+
+<nav class="docs-file-tree">
+  <h3 class="docs-top-level-title">{{ $rootSection.Title }}</h3>
+  {{- template "renderTree" (dict "Node" $rootSection "CurrentPage" .) -}}
+</nav>

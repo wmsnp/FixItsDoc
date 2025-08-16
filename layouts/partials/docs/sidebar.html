@@ -1,6 +1,0 @@
-{{- if eq .Type "docs" -}}
-{{- $firstLevelSection := cond (eq .CurrentSection .FirstSection) .CurrentSection .CurrentSection.FirstSection -}}
-<nav aria-label="Documentation navigation">
-  {{- partial "docs/file-tree.html" . -}}
-</nav>
-{{- end -}}

@@ -17,10 +17,6 @@
   --active-color: #ea4335;
   --border-color: #e0e0e0;
 }
-.docs-top-level-section {
-  padding-left: 0;
-  margin-bottom: 12px;
-}
 .docs-top-level-title {
   font-size: 20px;
   font-weight: 600;
@@ -34,12 +30,6 @@
   color: var(--accent-color);
   position: absolute;
   left: 0;
-}
-.docs-top-level-section > .docs-file,
-.docs-top-level-section > .docs-folder > summary {
-  padding-left: 16px;
-  margin-left: 0;
-  color: var(--text-color);
 }
 .docs-folder {
   margin: 4px 0;
@@ -93,10 +83,6 @@
 .docs-folder-contents {
   margin-left: 12px;
   padding-left: 6px;
-}
-.docs-root-files {
-  margin-top: 12px;
-  padding-left: 16px;
 }
 [data-theme="dark"] .docs-folder > summary::after {
   color: var(--text-color);

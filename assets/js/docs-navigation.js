@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+  const menuOverlay = document.querySelector('.docs-mobile-menu-overlay');
   document.querySelector('.docs-mobile-menu-button').addEventListener('click', function() {
     menuOverlay.classList.add('active');
   });

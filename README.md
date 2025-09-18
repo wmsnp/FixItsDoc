@@ -3,40 +3,11 @@
 
 ## Demo
 
-TODO 如有需要，请在此处添加演示
-
-## 要求
-
-- FixIt v0.3.12 或更高版本。
+![FixIt Demo](images/demo.jpeg)
 
 ## 安装组件
 
-安装方式与 [安装主题](https://fixit.lruihao.cn/zh-cn/documentation/installation/) 相同，有多种安装方式，任选一种即可，这里介绍两种主流方式。
-
-### 作为 Hugo 模块安装
-
-首先确保你的项目本身是一个 [Hugo 模块](https://gohugo.io/hugo-modules/use-modules/#initialize-a-new-module)。
-
-然后将此主题组件添加到你的 `hugo.toml` 配置文件中：
-
-```toml
-[module]
-  [[module.imports]]
-    path = "github.com/hugo-fixit/FixIt"
-  [[module.imports]]
-    path = "github.com/wmsnp/FixItsDoc"
-```
-
-在 Hugo 的第一次启动时，它将下载所需的文件。
-
-要更新到模块的最新版本，请运行：
-
-```bash
-hugo mod get -u
-hugo mod tidy
-```
-
-### 作为 Git 子模块安装
+安装方式与 [安装主题](https://fixit.lruihao.cn/zh-cn/documentation/installation/) 相同，有多种安装方式，任选一种即可，这里介绍作为 Git 子模块安装。
 
 将 [FixIt](https://github.com/hugo-fixit/FixIt) 和此 git 存储库克隆到你的主题文件夹中，并将其作为网站目录的子模块添加。
 
@@ -48,7 +19,7 @@ git submodule add https://github.com/wmsnp/FixItsDoc.git themes/FixItsDoc
 接下来编辑项目的 `hugo.toml` 并将此主题组件添加到你的主题中：
 
 ```toml
-theme = ["FixIt", "fixitsdoc"]
+theme = ["FixItsDoc", "FixIt"]
 ```
 
 ## 配置
@@ -59,16 +30,38 @@ theme = ["FixIt", "fixitsdoc"]
 [params]
   [params.customPartials]
     # ... other partials
-    head = []
-    profile = []
-    aside = []
-    comment = []
-    footer = []
-    widgets = []
     assets = [
       "inject/fixitsdoc.html",
     ]
-    postFooterBefore = []
-    postFooterAfter = []
     # ... other partials
+```
+
+## 使用
+
+在文档顶层文件夹的 `_index.md` 文件中，添加以下内容：
+```yaml
+---
+cascade:
+  params:
+    type: docs
+isTopLevel: true
+---
+```
+对于每个文件和目录，均根据 `weight` 排序
+
+## 更多功能
+
+通过覆盖 FixIt 主题的 `seo.html` 和 `post-author.html`，FixItsDoc 支持为每篇文章文章配置多个作者：
+
+```yaml
+author: 
+  - wmsnp
+  - {name: "another wmsnp", link: "https://github.com/wmsnp", avatar: "xxx"}
+---
+```
+
+如果你想体验 FixIt 主题的最新功能，请在项目的 `hugo.toml` 中将此主题组件添加到 `FixIt` 之后以禁用此功能：
+
+```toml
+theme = ["FixIt", "FixItsDoc"]
 ```
